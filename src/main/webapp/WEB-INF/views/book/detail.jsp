@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!-- jstl은 컨트롤러에서 보내준 데이터를 뷰에 표현해준다. -->
 <html>
 	<head>
 		<title>책 상세</title>

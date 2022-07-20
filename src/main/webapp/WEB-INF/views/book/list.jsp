@@ -23,7 +23,7 @@
 				<td>가격</td>  
 				</tr>  
 			</thead>  
-			<tbody>  
+			<tbody>
 				<c:forEach var="row" items="${data}">  
 				<tr>  
 					<td>  

@@ -12,11 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BookController {
+	// BookService bookService는 책 입력기능 서비스를 호출하기 위한 서비스 빈.
+	// 서비스를 호출하기 위해 BookService에 의존성을 주입한것. 이때 BookService인터페이스가 사용된 것
 	@Autowired
 	BookService bookService;
 	
 	
-	//입력
+	//입력.
+	//create 메소드는 /create 주소가 GET방식으로 입력되었을때 book/create 경로의 뷰를 보여줌.
 	@RequestMapping(value="/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 	    return new ModelAndView("book/create");
@@ -24,6 +27,7 @@ public class BookController {
 	
 	
 	//입력
+	//서비스를 이용해 책을 입력하는 컨트롤러 메소드.
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView createPost(@RequestParam Map<String, Object> map) {
 	    ModelAndView mav = new ModelAndView();
@@ -40,6 +44,9 @@ public class BookController {
 	
 	
 	//상세 페이지
+	//책 상세 페이지 URL이 입력되는 실행되는 메소드.
+	//RequestParam 어노테이션에 의해 쿼리 스트링 파라미터를 읽는것이다.
+	//스프링은 http 메소드를 구분하지 않고 파라미터를 GET, POST 동일한 방법으로 읽을 수 있게 해준다.
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(@RequestParam Map<String, Object> map) {
 	    Map<String, Object> detailMap = this.bookService.detail(map);
@@ -54,6 +61,8 @@ public class BookController {
 	
 	
 	//수정
+	//책 수정화면은 책 입력화면의 화면형식을 그대로 따라가고 데이터베이스에 저장된 데이터만 그려주면 됨.
+	//따라서 책 데이터는 상세화면에서 그대로 긁어오고, 뷰는 책 입력 화면을 복사해준다.
 	@RequestMapping(value = "/update", method = RequestMethod.GET)  
 	public ModelAndView update(@RequestParam Map<String, Object> map) {  
 		Map<String, Object> detailMap = this.bookService.detail(map);  
@@ -66,6 +75,10 @@ public class BookController {
 	
 	
 	//수정2
+	//책 수정 "화면"에서 책 수정 "기능"으로 보내주는 파라미터는 총 4개로, 하나는 GET파라미터로 전달되는
+	//bookId이며 나머지 세개는 form 태그를 통해 전달되는 title, category,price임.
+	//스프링을 http 메소드가 GET인지 POST인지 상관치 않고 @RequestMapping 어노테이션이 있으면
+	//무조건 파라미터를 넣어줌. 따라서 파라미터 map 안에는 4개의 데이터가 다 들어있다.
 	@RequestMapping(value = "update", method = RequestMethod.POST)  
 	public ModelAndView updatePost(@RequestParam Map<String, Object> map) {  
 		ModelAndView mav = new ModelAndView();  

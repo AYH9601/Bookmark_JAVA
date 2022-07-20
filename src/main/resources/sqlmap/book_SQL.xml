@@ -2,7 +2,11 @@
 <!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="book">
 
-
+	<!-- 
+		xml 파일에선 쿼리를 작성한다. 마이바티스가 xml에 설정된 쿼리를 읽어서 실행을 시켜준다. 
+		mapper xml 그 자체는 DAO (Data Access Object가 실행시켜줌.)
+	-->
+	
 	<insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="book_id">  
 	    <![CDATA[
 		    insert into book
@@ -49,6 +53,8 @@
 	</delete> 
 
 
+<!-- 목록의 경우 resultType은 한 행을 담는 타입을 지정. 책 상세페이지와 동일함. -->
+<!-- 기존의 책 목록 쿼리를 조금 수정해서 검색기능을 추가한것. -->
 	<select id="select_list" parameterType="hashMap" resultType="hashMap">  
 		<![CDATA[  
 			select  
